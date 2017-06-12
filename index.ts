@@ -3,3 +3,4 @@
  * Created: 2017/6/11
  * Description:
  */
+import 'es6-shim';

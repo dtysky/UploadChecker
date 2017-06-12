@@ -6,7 +6,7 @@
 
 import {TFileTypes, TFile} from './types';
 
-export const checkType = (file, types: TFileTypes) => {
+export const checkType = (file: TFile, types: TFileTypes) => {
   return types.indexOf(file.type) >= 0;
 }
 

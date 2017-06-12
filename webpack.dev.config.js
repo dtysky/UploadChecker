@@ -8,11 +8,11 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 
 module.exports = {
-  entry: ['webpack-hot-middleware/client?path=http://localhost:8888/__webpack_hmr&reload=true'],
+  entry: ['webpack-hot-middleware/client?path=http://localhost:4444/__webpack_hmr&reload=true'],
   output: {
-    path: path.resolve(__dirname, 'dist'),
-    filename: 'index.ts',
-    publicPath: '/dist/'
+    path: path.resolve(__dirname),
+    filename: 'main.js',
+    publicPath: '/'
   },
 
   resolve: {

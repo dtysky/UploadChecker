@@ -4,7 +4,7 @@
   "description": "Check type/size/resolution while uploading files in pure front-end way.",
   "main": "index.ts",
   "scripts": {
-    "test": "test"
+    "dev": "node server.dev.js"
   },
   "repository": {
     "type": "git",
