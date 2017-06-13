@@ -3,9 +3,22 @@
  * Created: 2017/6/11
  * Description:
  */
-import {TFile, TImageLimits, CheckError} from './types';
+import {
+  TFile, TImageLimits, IFileInfo, CheckError, ICheckRespones
+} from './types';
 
-export const checkImage = (file: TFile, maxBytesPerPixel: number, maxSize: number, maxWidth?: number) => {
+export const checkImage: (
+  file: TFile,
+  maxBytesPerPixel: number,
+  maxSize: number,
+  maxWidth?: number
+) => Promise<ICheckRespones>
+  = (
+    file: TFile,
+    maxBytesPerPixel: number,
+    maxSize: number,
+    maxWidth?: number
+) => {
   return new Promise((resolve, reject) => {
     const image = new Image();
     image.onload = () => {
@@ -13,56 +26,62 @@ export const checkImage = (file: TFile, maxBytesPerPixel: number, maxSize: numbe
       const width = image.width;
       const height = image.height;
       const size = width * height;
+
+      const info: IFileInfo = {type: file.type, width, height, size};
+
       if (maxWidth && width > maxWidth) {
-        return reject(new CheckError({
-          name: 'width',
-          currentValue: width,
-          limitValue: maxWidth,
-          file,
-          width,
-          height,
-          size,
-          message: `The max width of image is ${maxWidth}，current is ${width}`
-        }));
+        return reject({
+          error: new CheckError({
+            name: 'width',
+            currentValue: width,
+            limitValue: maxWidth,
+            message: `The max width of image is ${maxWidth}，current is ${width}`
+          }),
+          info,
+          file
+        });
       }
       if (size > maxSize) {
-        return reject(new CheckError({
-          name: 'size',
-          currentValue: size,
-          limitValue: maxSize,
-          file: file,
-          width: width,
-          height: height,
-          size: size,
-          message: `The max size of image is ${maxSize}，current is ${width * height}`
-        }));
+        return reject({
+          error: new CheckError({
+            name: 'size',
+            currentValue: size,
+            limitValue: maxSize,
+            message: `The max size of image is ${maxSize}，current is ${width * height}`
+          }),
+          info,
+          file
+        });
       }
 
       const maxKB = ~~(maxBytesPerPixel * size / 1024) + 1;
 
       if (file.size > maxKB * 1024) {
-        return reject(new CheckError({
-          name: 'bytes',
-          currentValue: file.size,
-          limitValue: maxKB * 1024,
-          file,
-          width,
-          height,
-          size,
-          message: `In current size ${width} x ${height}，image should be less than ${maxKB}KB`
-        }));
+        return reject({
+          error: new CheckError({
+            name: 'bytes',
+            currentValue: file.size,
+            limitValue: maxKB * 1024,
+            message: `In current size ${width} x ${height}，image should be less than ${maxKB}KB`
+          }),
+          info,
+          file
+        });
       }
-      return resolve(file);
+      return resolve({file, info});
     };
     image.onerror = () => {
       URL.revokeObjectURL(image.src);
-      return reject(new CheckError({
-        name: 'unknown',
-        currentValue: 'unknown',
-        limitValue: 'image',
-        file,
-        message: `Please upload the real image that could be open in the browser`
-      }));
+      return reject({
+        error: new CheckError({
+          name: 'unknown',
+          currentValue: 'unknown',
+          limitValue: 'image',
+          message: `Please upload the real image that could be open in the browser`
+        }),
+        info: {type: file.type},
+        file
+      });
     };
     image.src = URL.createObjectURL(file);
   });

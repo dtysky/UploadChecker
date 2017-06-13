@@ -20,20 +20,24 @@ interface IStateTypes {
 
 class Demo extends Component<IPropTypes, IStateTypes> {
   private handleDrop = res => {
-    console.log(res);
+    if (res.error) {
+      alert(res.error.message);
+    }
   }
 
   public render() {
     return (
-      <UploadChecker
-        types={['image/jpeg']}
-        style={{
-          width: 64,
-          height: 64,
-          background: '#000'
-        }}
-        onDrop={this.handleDrop}
-      />
+      <div
+        className={'root'}
+      >
+        <UploadChecker
+          className={'upload'}
+          types={['image/jpeg']}
+          onDrop={this.handleDrop}
+        >
+          Upload
+        </UploadChecker>
+      </div>
     );
   }
 }

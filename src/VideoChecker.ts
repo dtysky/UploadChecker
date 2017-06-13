@@ -3,9 +3,24 @@
  * Created: 2017/6/11
  * Description:
  */
-import {TFile, TVideoLimits, CheckError} from './types';
+import {
+  TFile, TVideoLimits, IFileInfo, CheckError, ICheckRespones
+} from './types';
 
-export const checkVideo = (file: TFile, maxBytesPerPixelPerSecond: number, maxDuration: number, maxSize: number, maxWidth?: number) => {
+export const checkVideo: (
+  file: TFile,
+  maxBytesPerPixelPerSecond: number,
+  maxDuration: number,
+  maxSize: number,
+  maxWidth?: number
+) => Promise<ICheckRespones>
+  = (
+    file: TFile,
+    maxBytesPerPixelPerSecond: number,
+    maxDuration: number,
+    maxSize: number,
+    maxWidth?: number
+) => {
   return new Promise((resolve, reject) => {
     const video = document.createElement('video');
     video.preload = 'metadata';
@@ -21,72 +36,74 @@ export const checkVideo = (file: TFile, maxBytesPerPixelPerSecond: number, maxDu
       const height = video.videoHeight;
       const size = width * height;
       const duration = video.duration;
+
+      const info: IFileInfo = {type: file.type, width, height, size, duration};
+
       if (maxWidth && width > maxWidth) {
-        return reject(new CheckError({
-          name: 'width',
-          currentValue: width,
-          limitValue: maxWidth,
+        return reject({
+          error: new CheckError({
+            name: 'width',
+            currentValue: width,
+            limitValue: maxWidth,
+            message: `The max width of video is ${maxWidth}，current is ${width}`
+          }),
           file,
-          width,
-          height,
-          size,
-          duration,
-          message: `The max width of video is ${maxWidth}，current is ${width}`
-        }));
+          info
+        });
       }
       if (size > maxSize) {
-        return reject(new CheckError({
-          name: 'size',
-          currentValue: size,
-          limitValue: maxSize,
+        return reject({
+          error: new CheckError({
+            name: 'size',
+            currentValue: size,
+            limitValue: maxSize,
+            message: `The max size of video is ${maxSize}，current is ${width * height}`
+          }),
           file,
-          width,
-          height,
-          size,
-          duration,
-          message: `The max size of video is ${maxSize}，current is ${width * height}`
-        }));
+          info
+        });
       }
       if (duration > maxDuration) {
-        return reject(new CheckError({
-          name: 'duration',
-          currentValue: duration,
-          limitValue: maxDuration,
+        return reject({
+          error: new CheckError({
+            name: 'duration',
+            currentValue: duration,
+            limitValue: maxDuration,
+            message: `The max duration of video is ${maxDuration}，current is ${duration}`
+          }),
           file,
-          width,
-          height,
-          size,
-          duration,
-          message: `The max duration of video is ${maxDuration}，current is ${duration}`
-        }));
+          info
+        });
       }
 
       const maxMB = ~~(maxBytesPerPixelPerSecond * size * duration / 1024 / 1024) + 1;
 
       if (file.size > maxMB * 1024 * 1024) {
-        return reject(new CheckError({
-          name: 'bytes',
-          currentValue: file.size,
-          limitValue: maxMB * 1024 * 1024,
+        return reject({
+          error: new CheckError({
+            name: 'bytes',
+            currentValue: file.size,
+            limitValue: maxMB * 1024 * 1024,
+            message: `In current size ${width} x ${height} and duration ${duration}，video should be less than ${maxMB.toFixed(2)}MB`
+          }),
           file,
-          width,
-          height,
-          size,
-          duration,
-          message: `In current size ${width} x ${height} and duration ${duration}，video should be less than ${maxMB.toFixed(2)}MB`
-        }));
+          info
+        });
       }
-      return resolve(file);
+      return resolve({file, info});
     };
     video.onerror = () => {
       URL.revokeObjectURL(video.src);
-      return reject(new CheckError({
-        name: 'unknown',
-        currentValue: 'unknown',
-        limitValue: 'video',
-        file: file,
-        message: `Please upload the real video that could be open in the browser`
-      }));
+      return reject({
+        error: new CheckError({
+          name: 'unknown',
+          currentValue: 'unknown',
+          limitValue: 'video',
+          message: `Please upload the real video that could be open in the browser`
+        }),
+        file,
+        info: {type: file.type}
+      });
     };
     video.src = URL.createObjectURL(file);
   });

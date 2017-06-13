@@ -4,10 +4,10 @@
  * Description:
  */
 import  * as React from 'react';
-import {Component, MouseEvent, ChangeEvent} from 'react';
+import {Component, MouseEvent} from 'react';
 
 import {
-  TFileTypes, TFile, ICheckError, imageRegex, videoRegex
+  TFileTypes, imageRegex, videoRegex, ICheckRespones
 } from './types';
 import {checkType} from './TypeChecker';
 import {checkImage} from './ImageChecker';
@@ -16,11 +16,9 @@ import {checkVideo} from './VideoChecker';
 interface IPropTypes {
   types: TFileTypes;
   multiple?: boolean;
-  onDrop?: (res: {
-    file: TFile,
-    error?: ICheckError
-  }) => any;
-  children?: JSX.Element;
+  onDrop?: (res: ICheckRespones) => any;
+  children?: JSX.Element | string;
+  className?: string;
   style?: any;
   imageLimit?: {
     maxBytesPerPixel: number,
@@ -73,8 +71,8 @@ export default class UploadChecker extends Component<IPropTypes, IStateTypes> {
               imageLimit.maxSize,
               imageLimit.maxWidth
             )
-              .then(() => onDrop({file}))
-              .catch(error => onDrop({file, error}));
+              .then(res => onDrop(res))
+              .catch(res => onDrop(res));
           } else if (videoLimit && videoRegex.test(file.type)) {
             checkVideo(
               file,
@@ -83,13 +81,13 @@ export default class UploadChecker extends Component<IPropTypes, IStateTypes> {
               videoLimit.maxWidth,
               videoLimit.maxDuration
             )
-              .then(() => onDrop({file}))
-              .catch(error => onDrop({error, file}));
+              .then(res => onDrop(res))
+              .catch(res => onDrop(res));
           } else {
-            onDrop({file});
+            onDrop({file, info: {type: file.type}});
           }
         })
-        .catch(error => onDrop({error, file}));
+        .catch(res => onDrop(res));
     }
   }
 
@@ -97,7 +95,8 @@ export default class UploadChecker extends Component<IPropTypes, IStateTypes> {
     const {
       multiple,
       children,
-      style
+      style,
+      className
     } = this.props;
 
     return (
@@ -105,6 +104,7 @@ export default class UploadChecker extends Component<IPropTypes, IStateTypes> {
         onClick={() => {
           (this.refs.input as HTMLInputElement).click();
         }}
+        className={className}
         style={style}
       >
         <input
