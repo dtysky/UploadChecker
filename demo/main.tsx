@@ -8,6 +8,7 @@ import {Component} from 'react';
 import {render} from 'react-dom';
 
 import './main.css';
+import UploadChecker from '../index';
 
 interface IPropTypes {
 
@@ -18,9 +19,21 @@ interface IStateTypes {
 }
 
 class Demo extends Component<IPropTypes, IStateTypes> {
+  private handleDrop = res => {
+    console.log(res);
+  }
+
   public render() {
     return (
-      <div></div>
+      <UploadChecker
+        types={['image/jpeg']}
+        style={{
+          width: 64,
+          height: 64,
+          background: '#000'
+        }}
+        onDrop={this.handleDrop}
+      />
     );
   }
 }

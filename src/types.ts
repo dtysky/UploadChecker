@@ -3,6 +3,10 @@
  * Created: 2017/6/11
  * Description:
  */
+declare const window: any;
+window.URL = window.URL || window.webkitURL;
+
+
 export type TFile = File;
 
 export type TFileType = string;
@@ -10,7 +14,10 @@ export type TFileTypes = TFileType[];
 
 export type TImageLimits = 'maxBytesPerPixel' | 'maxSize' | 'maxWidth';
 
-export type TVideoLimits = 'maxBytesPerPixel' | 'maxSize' | 'maxWidth' | 'maxDuration';
+export type TVideoLimits = 'maxBytesPerPixelPerSecond' | 'maxSize' | 'maxWidth' | 'maxDuration';
+
+export const videoRegex = /^video/;
+export const imageRegex = /^image/;
 
 export type TError = string;
 

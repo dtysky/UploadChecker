@@ -93,13 +93,13 @@ export const checkVideo = (file: TFile, maxBytesPerPixelPerSecond: number, maxDu
 }
 
 export class VideoChecker {
-  private maxBytesPerPixel = 0;
+  private maxBytesPerPixelPerSecond = 0;
   private maxSize = 0;
   private maxWidth = 0;
   private maxDuration = 0;
 
-  constructor(maxBytesPerPixel: number, maxDuration: number, maxSize: number, maxWidth?: number) {
-    this.maxBytesPerPixel = maxBytesPerPixel;
+  constructor(maxBytesPerPixelPerSecond: number, maxDuration: number, maxSize: number, maxWidth?: number) {
+    this.maxBytesPerPixelPerSecond = maxBytesPerPixelPerSecond;
     this.maxSize = maxSize;
     this.maxDuration = maxDuration;
     if (maxWidth) {
@@ -112,6 +112,6 @@ export class VideoChecker {
   }
 
   public check = (file: TFile) => {
-    return checkVideo(file, this.maxBytesPerPixel, this.maxDuration, this.maxSize, this.maxWidth);
+    return checkVideo(file, this.maxBytesPerPixelPerSecond, this.maxDuration, this.maxSize, this.maxWidth);
   }
 }
