@@ -4,7 +4,7 @@
  * Description:
  */
 import {
-  TFile, TImageLimits, IFileInfo, CheckError, ICheckRespones
+  TFile, TImageConstraintKey, IFileInfo, CheckError, ICheckResponse
 } from './types';
 
 export const checkImage: (
@@ -12,7 +12,7 @@ export const checkImage: (
   maxBytesPerPixel: number,
   maxSize: number,
   maxWidth?: number
-) => Promise<ICheckRespones>
+) => Promise<ICheckResponse>
   = (
     file: TFile,
     maxBytesPerPixel: number,
@@ -100,7 +100,7 @@ export class ImageChecker {
     }
   }
 
-  public setAttr = (key: TImageLimits, value: number) => {
+  public setAttr = (key: TImageConstraintKey, value: number) => {
     this[key] = value;
   }
 

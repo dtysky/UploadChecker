@@ -4,7 +4,7 @@
  * Description:
  */
 import {
-  TFile, TVideoLimits, IFileInfo, CheckError, ICheckRespones
+  TFile, TVideoConstraintKey, IFileInfo, CheckError, ICheckResponse
 } from './types';
 
 export const checkVideo: (
@@ -13,7 +13,7 @@ export const checkVideo: (
   maxDuration: number,
   maxSize: number,
   maxWidth?: number
-) => Promise<ICheckRespones>
+) => Promise<ICheckResponse>
   = (
     file: TFile,
     maxBytesPerPixelPerSecond: number,
@@ -124,7 +124,7 @@ export class VideoChecker {
     }
   }
 
-  public setAttr = (key: TVideoLimits, value: number) => {
+  public setAttr = (key: TVideoConstraintKey, value: number) => {
     this[key] = value;
   }
 

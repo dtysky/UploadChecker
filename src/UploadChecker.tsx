@@ -7,7 +7,7 @@ import  * as React from 'react';
 import {Component, MouseEvent} from 'react';
 
 import {
-  TFileTypes, imageRegex, videoRegex, ICheckRespones
+  TFileTypes, imageRegex, videoRegex, ICheckResponse
 } from './types';
 import {checkType} from './TypeChecker';
 import {checkImage} from './ImageChecker';
@@ -16,16 +16,16 @@ import {checkVideo} from './VideoChecker';
 interface IPropTypes {
   types: TFileTypes;
   multiple?: boolean;
-  onDrop?: (res: ICheckRespones) => any;
+  onDrop?: (res: ICheckResponse) => any;
   children?: JSX.Element | string;
   className?: string;
   style?: any;
-  imageLimit?: {
+  imageConstraint?: {
     maxBytesPerPixel: number,
     maxSize: number,
     maxWidth?: number
   },
-  videoLimit?: {
+  videoConstraint?: {
     maxBytesPerPixelPerSecond: number,
     maxSize: number,
     maxWidth?: number,
@@ -47,8 +47,8 @@ export default class UploadChecker extends Component<IPropTypes, IStateTypes> {
   private handleDrop = (e: any) => {
     const {
       types,
-      imageLimit,
-      videoLimit,
+      imageConstraint,
+      videoConstraint,
       onDrop
     } = this.props;
 
@@ -64,22 +64,22 @@ export default class UploadChecker extends Component<IPropTypes, IStateTypes> {
       const file = files[i];
       checkType(file, types)
         .then(() => {
-          if (imageLimit && imageRegex.test(file.type)) {
+          if (imageConstraint && imageRegex.test(file.type)) {
             checkImage(
               file,
-              imageLimit.maxBytesPerPixel,
-              imageLimit.maxSize,
-              imageLimit.maxWidth
+              imageConstraint.maxBytesPerPixel,
+              imageConstraint.maxSize,
+              imageConstraint.maxWidth
             )
               .then(res => onDrop(res))
               .catch(res => onDrop(res));
-          } else if (videoLimit && videoRegex.test(file.type)) {
+          } else if (videoConstraint && videoRegex.test(file.type)) {
             checkVideo(
               file,
-              videoLimit.maxBytesPerPixelPerSecond,
-              videoLimit.maxSize,
-              videoLimit.maxWidth,
-              videoLimit.maxDuration
+              videoConstraint.maxBytesPerPixelPerSecond,
+              videoConstraint.maxSize,
+              videoConstraint.maxWidth,
+              videoConstraint.maxDuration
             )
               .then(res => onDrop(res))
               .catch(res => onDrop(res));

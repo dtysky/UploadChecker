@@ -5,13 +5,13 @@
  */
 
 import {
-  TFileTypes, TFile, IFileInfo, CheckError, ICheckRespones
+  TFileTypes, TFile, IFileInfo, CheckError, ICheckResponse
 } from './types';
 
 export const checkType: (
   file: TFile,
   types: TFileTypes
-) => Promise<ICheckRespones>
+) => Promise<ICheckResponse>
   = (
     file: TFile,
     types: TFileTypes

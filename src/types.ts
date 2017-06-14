@@ -12,9 +12,9 @@ export type TFile = File;
 export type TFileType = string;
 export type TFileTypes = TFileType[];
 
-export type TImageLimits = 'maxBytesPerPixel' | 'maxSize' | 'maxWidth';
+export type TImageConstraintKey = 'maxBytesPerPixel' | 'maxSize' | 'maxWidth';
 
-export type TVideoLimits = 'maxBytesPerPixelPerSecond' | 'maxSize' | 'maxWidth' | 'maxDuration';
+export type TVideoConstraintKey = 'maxBytesPerPixelPerSecond' | 'maxSize' | 'maxWidth' | 'maxDuration';
 
 export const videoRegex = /^video/;
 export const imageRegex = /^image/;
@@ -51,7 +51,7 @@ export class CheckError extends Error {
   }
 }
 
-export interface ICheckRespones {
+export interface ICheckResponse {
   file: TFile;
   info: IFileInfo;
   error?: ICheckError;
