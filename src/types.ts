@@ -6,7 +6,6 @@
 declare const window: any;
 window.URL = window.URL || window.webkitURL;
 
-
 export type TFile = File;
 
 export type TFileType = string;
