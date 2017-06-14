@@ -1,4 +1,5 @@
-html, body, .full {
+html, body, .container {
+    background: #333;
     min-width: 100%;
     min-height: 100%;
     width: 100%;
@@ -6,4 +7,40 @@ html, body, .full {
     border: 0;
     margin: 0;
     padding: 0;
+}
+
+.root {
+    width: auto;
+    padding: 0 24px;
+}
+
+.upload {
+    width: 100%;
+    height: 240px;
+    background: #f0f;
+    font-size: 24px;
+    color: white;
+    line-height: 240px;
+    text-align: center;
+    cursor: pointer;
+}
+
+h3 {
+    color: white;
+}
+
+.constraint-types {
+
+}
+
+.constraint-list {
+
+}
+
+.constraint-item {
+    color: white;
+}
+
+.info {
+    color: white;
 }

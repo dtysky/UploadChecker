@@ -41,7 +41,7 @@ export const checkImage: (
           file
         });
       }
-      if (size > maxSize) {
+      if (maxSize && size > maxSize) {
         return reject({
           error: new CheckError({
             name: 'size',
@@ -56,7 +56,7 @@ export const checkImage: (
 
       const maxKB = ~~(maxBytesPerPixel * size / 1024) + 1;
 
-      if (file.size > maxKB * 1024) {
+      if (maxSize && maxBytesPerPixel && file.size > maxKB * 1024) {
         return reject({
           error: new CheckError({
             name: 'bytes',
@@ -79,7 +79,7 @@ export const checkImage: (
           limitValue: 'image',
           message: `Please upload the real image that could be open in the browser`
         }),
-        info: {type: file.type},
+        info: {type: 'unknown'},
         file
       });
     };

@@ -30,7 +30,7 @@ export const checkType: (
         name: 'type',
         currentValue: file.type,
         limitValue: types,
-        message: `The type of file should be ${types.join(',')}，current is ${file.type}`
+        message: `The type of file should be ${types.join(', ')}，current is ${file.type}`
       }),
       file,
       info

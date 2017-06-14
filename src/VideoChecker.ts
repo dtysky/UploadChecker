@@ -51,7 +51,7 @@ export const checkVideo: (
           info
         });
       }
-      if (size > maxSize) {
+      if (maxSize && size > maxSize) {
         return reject({
           error: new CheckError({
             name: 'size',
@@ -63,7 +63,7 @@ export const checkVideo: (
           info
         });
       }
-      if (duration > maxDuration) {
+      if (maxDuration && duration > maxDuration) {
         return reject({
           error: new CheckError({
             name: 'duration',
@@ -78,7 +78,7 @@ export const checkVideo: (
 
       const maxMB = ~~(maxBytesPerPixelPerSecond * size * duration / 1024 / 1024) + 1;
 
-      if (file.size > maxMB * 1024 * 1024) {
+      if (maxSize && maxDuration && maxBytesPerPixelPerSecond &&  file.size > maxMB * 1024 * 1024) {
         return reject({
           error: new CheckError({
             name: 'bytes',
@@ -102,7 +102,7 @@ export const checkVideo: (
           message: `Please upload the real video that could be open in the browser`
         }),
         file,
-        info: {type: file.type}
+        info: {type: 'unknown'}
       });
     };
     video.src = URL.createObjectURL(file);
