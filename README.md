@@ -1,7 +1,7 @@
 # UploadChecker
 Check and constrain type/size/resolution while uploading files in pure front-end way.
 
-[![ghit.me](https://ghit.me/badge.svg?repo=dtysky/FPGA-Imaging-Library)](https://ghit.me/repo/dtysky/FPGA-Imaging-Library)
+[![ghit.me](https://ghit.me/badge.svg?repo=dtysky/MoeNotes)](https://ghit.me/repo/dtysky/MoeNotes)
 
 ## Demo
 
