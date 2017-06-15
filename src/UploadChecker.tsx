@@ -16,7 +16,7 @@ import {checkVideo} from './VideoChecker';
 interface IPropTypes {
   types: TFileTypes;
   multiple?: boolean;
-  onDrop?: (res: ICheckResponse) => any;
+  onDrop?: (res: ICheckResponse) => void;
   children?: JSX.Element | string;
   className?: string;
   style?: any;
@@ -96,7 +96,12 @@ export default class UploadChecker extends Component<IPropTypes, IStateTypes> {
       multiple,
       children,
       style,
-      className
+      className,
+      onDrop,
+      types,
+      imageConstraint,
+      videoConstraint,
+      ...others
     } = this.props;
 
     return (
@@ -119,6 +124,7 @@ export default class UploadChecker extends Component<IPropTypes, IStateTypes> {
             (e.target as HTMLInputElement).value = null;
           }}
           onChange={this.handleDrop}
+          {...others}
         />
         {children}
       </div>

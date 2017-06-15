@@ -1,5 +1,4 @@
 html, body, .container {
-    background: #333;
     min-width: 100%;
     min-height: 100%;
     width: 100%;
@@ -7,40 +6,88 @@ html, body, .container {
     border: 0;
     margin: 0;
     padding: 0;
+    background: #f6f6f6;
 }
 
 .root {
+    width: 100%;
+    padding-bottom: 24px;
+}
+
+.content {
     width: auto;
     padding: 0 24px;
+}
+
+.topbar {
+    width: 100%;
+    height: 84px;
+    background: #efefef;
+    box-shadow: 0 3px 4px #ddd;
+    font-size: 18px;
+}
+
+.topbar a {
+    font-family: Icons;
+    position: absolute;
+    right: 32px;
+    top: 32px;
+    color: #777;
+    font-weight: bolder;
+    transition: all .3s ease-out;
+}
+
+.topbar a:after {
+    content: "\f09b";
+    margin-left: 12px;
+    font-size: 28px;
+}
+
+.topbar a:hover {
+    color: #444;
 }
 
 .upload {
     width: 100%;
     height: 240px;
-    background: #f0f;
-    font-size: 24px;
-    color: white;
+    background: #26b4a8;
+    font-size: 48px;
     line-height: 240px;
     text-align: center;
     cursor: pointer;
-}
-
-h3 {
     color: white;
+    margin-top: 24px;
+    border-radius: 12px;
+    font-family: Icons;
 }
 
-.constraint-types {
-
+.upload:before {
+    content: "\F25a";
+    margin-right: 18px;
 }
 
-.constraint-list {
-
+.ui.checkbox {
+    font-size: 16px;
+    margin: 3px 0;
 }
 
-.constraint-item {
-    color: white;
+.ui.cards.card-group {
+    margin-top: 24px;
 }
 
-.info {
-    color: white;
+.ui.cards.card-group>.card {
+    flex: 1;
+    min-width: 320px;
+}
+
+.ui.card.card-info {
+    width: 100%;
+}
+
+.ui.table thead.info-error th {
+    background: #cb8590;
+}
+
+.ui.table thead.info-pass th {
+    background: #16aa9d;
 }

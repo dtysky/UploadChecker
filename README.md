@@ -1,6 +1,8 @@
 # UploadChecker
 Check and constrain type/size/resolution while uploading files in pure front-end way.
 
+[![ghit.me](https://ghit.me/badge.svg?repo=dtysky/FPGA-Imaging-Library)](https://ghit.me/repo/dtysky/FPGA-Imaging-Library)
+
 ## Demo
 
 [You can view the live demo here.]()
@@ -154,7 +156,7 @@ checkVideo(file, maxBytesPerPixelPerSecond, maxDuration, maxSize, maxWidth)
 .catch(res => {......});
 ```
 
-### videoChecker
+### VideoChecker
 
 An class for storing video's constraints then could be reused with `check` method.
 
@@ -173,6 +175,23 @@ checker.check(file);
 ```
 
 ### UploadChecker
+
+A react component for better usage.
+
+#### Props
+
+|Name|type|Description|
+|-|-|-|
+|types|IFileTypes|Same as parameters of constructor of TypeChecker.|
+|multiple|boolean|Could user select multiple files.|
+|onDrop|(res: ICheckResponse) => void|A callback will be called after file is checked.|
+|imageConstraint|Same as parameters of constructor of ImageChecker.|Constraints for image files.|
+|videoConstraint|Same as parameters of constructor of VideoChecker.|Constraints for video files.|
+|children|JSX.Element \| string|Children element.|
+|className|string|ClassName for root element.|
+|style|any|Style for root element.|
+
+All others props will be passed to `input`.
 
 ## Contribute
 
