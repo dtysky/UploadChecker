@@ -12,8 +12,9 @@
   },
   "keywords": [
     "upload",
-    "file-check",
-    "react"
+    "file",
+    "react",
+    "checker"
   ],
   "author": "dtysky",
   "license": "MIT",

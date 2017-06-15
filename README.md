@@ -1,15 +1,21 @@
 # UploadChecker
-Check type/size/resolution while uploading files in pure front-end way.
+Check and constrain type/size/resolution while uploading files in pure front-end way.
 
 ## Demo
 
 [You can view the live demo here.]()
 
-## Support browsers
+## Browsers Supporting
 
+Upload checker support all browsers that support `Blob URLs`, you can check them here：
+
+http://caniuse.com/#feat=bloburls
 
 ## Installation
 
+```bash
+npm install upload-checker
+```
 
 ## Data structures
 
@@ -25,58 +31,168 @@ Following tables show all types and interfaces:
 
 |Name|Value|Description|
 |-|-|-|
-|TFile|File||
-|TFileType|string||
-|TFileTypes|TFileType[]||
-|TImageConstraintKey|'maxBytesPerPixel' \| 'maxSize' \| 'maxWidth'||
-|TVideoConstraintKey|'maxBytesPerPixelPerSecond' \| 'maxSize' \| 'maxWidth' \| 'maxDuration'||
-|TError| 'type' \| 'width' \| 'size' \| 'duration' \| 'bytes' \| 'unknown'||
+|TFile|File|A HTML file element.|
+|TFileType|string|Type of file, like 'image/png'.|
+|TFileTypes|TFileType[]|Array of TFile.|
+|TImageConstraintKey|'maxBytesPerPixel' \| 'maxSize' \| 'maxWidth'|All constraints for image files.|
+|TVideoConstraintKey|'maxBytesPerPixelPerSecond' \| 'maxSize' \| 'maxWidth' \| 'maxDuration'|All constraints for video files.|
+|TError| 'type' \| 'width' \| 'size' \| 'duration' \| 'bytes' \| 'unknown'|Error types.|
 
 ### IFileInfo
 
 |Name|required|type|Description|
-|-|-|-|-|
-|type|√|string||
-|width|x|number||
-|height|x|number||
-|size|x|number||
-|duration|x|number||
+|-|:-:|-|-|
+|type|√|TFileType|Type of file.|
+|width|x|number|Width of image or video.|
+|height|x|number|Height of image or video.|
+|size|x|number|Size (width x height) of image or video.|
+|duration|x|number|Duration of video.|
 
 ### ICheckError
 
 |Name|required|type|Description|
-|-|-|-|-|
-|name|√|string||
-|currentValue|√|number \| string[] \| string||
-|limitValue|√|number \| string[] \| string||
-|stack|√|string||
-|message|√|string||
+|-|:-:|-|-|
+|name|√|TError|Type of error.|
+|currentValue|√|number \| string[] \| string|Current value of wrong constraint.|
+|limitValue|√|number \| string[] \| string|Max value of wrong constraint.|
+|stack|√|string|Error stack.|
+|message|√|string|Error message.|
 
 ### ICheckResponse
 
 |Name|required|type|Description|
-|-|-|-|-|
-|file|√|TFile||
-|info|√|IFileInfo||
-|error|x|ICheckError||
+|-|:-:|-|-|
+|file|√|TFile|Current file.|
+|info|√|IFileInfo|Info of file.|
+|error|x|ICheckError|Error of checking if something wrong.|
 
 ## API
 
-Upload checker provides rich api for different requirements.
+Upload checker provides rich api for different requirements. You can import theme in two ways:
+
+```ts
+import {checkType} from 'upload-checker';
+```
+
+or
+
+```ts
+import {checkType} from 'upload-checker/TypeChecker';
+```
+
+In the second way, only module `TypeChecker` will be packed to your source file.
 
 ### checkType
 
+(file: TFile,types: TFileTypes) => Promise<ICheckResponse>
+
+In module `upload-checker/TypeChecker`.
+
+```ts
+checkType(file, types)
+.then(res => {......})
+.catch(res => {......});
+```
+
 ### TypeChecker
+
+An class for storing types' constraints then could be reused with `check` method.
+
+In module `upload-checker/TypeChecker`.
+
+|Method|type|Description|
+|-|-|-|
+|constructor|(types: TFileTypes = []) => void|Constructor function, if types is empty, all file types will be allowed.|
+|setTypes|(types: TFileTypes) => void|Set types of checker.|
+|check|(file: TFile) => Promise<ICheckResponse>|Check file with current types.|
+
+```ts
+const checker = TypeChecker(['image/png']);
+checker.setTypes(['image/jpeg']);
+checker.check(file);
+```
 
 ### checkImage
 
+(file: TFile, maxBytesPerPixel: number, maxSize: number, maxWidth?: number) => Promise<ICheckResponse>
+
+In module `upload-checker/ImageChecker`.
+
+```ts
+checkImage(file, maxBytesPerPixel, maxSize, maxWidth)
+.then(res => {......})
+.catch(res => {......});
+```
+
 ### ImageChecker
+
+An class for storing image's constraints then could be reused with `check` method.
+
+In module `upload-checker/ImageChecker`.
+
+|Method|type|Description|
+|-|-|-|
+|constructor|(maxBytesPerPixel: number, maxSize: number, maxWidth?: number) => void|Constructor function, if max[attr] is 0, checker will not check that.|
+|setAttr|(key: TImageConstraintKey, value: number) => void|Set attr of checker.|
+|check|(file: TFile) => Promise<ICheckResponse>|Check file with current constraint.|
+
+```ts
+const checker = ImageChecker(.5, 1280 * 720);
+checker.setAttr('maxWidth', 1280);
+checker.check(file);
+```
 
 ### checkVideo
 
+(file: TFile, maxBytesPerPixelPerSecond: number, maxDuration: number, maxSize: number, maxWidth?: number) => Promise<ICheckResponse>
+
+In module `upload-checker/VideoChecker`.
+
+```ts
+checkVideo(file, maxBytesPerPixelPerSecond, maxDuration, maxSize, maxWidth)
+.then(res => {......})
+.catch(res => {......});
+```
+
 ### videoChecker
 
+An class for storing video's constraints then could be reused with `check` method.
+
+In module `upload-checker/VideoChecker`.
+
+|Method|type|Description|
+|-|-|-|
+|constructor|(maxBytesPerPixelPerSecond: number, maxDuration: number, maxSize: number, maxWidth?: number) => void|Constructor function, if max[attr] is 0, checker will not check that.|
+|setTypes|(types: TFileTypes) => void|Set attr of checker.|
+|check|(file: TFile) => Promise<ICheckResponse>|Check file with current constraint.|
+
+```ts
+const checker = videoChecker(.5, 10, 1280 * 720);
+checker.setAttr('maxWidth', 1280);
+checker.check(file);
+```
+
 ### UploadChecker
+
+## Contribute
+
+### Development
+
+Run:
+
+```bash
+npm run dev
+```
+
+then open `localhost:4444`.
+
+### Build
+
+Run:
+
+```bash
+npm run build
+```
 
 ## License
 

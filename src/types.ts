@@ -19,7 +19,7 @@ export const videoRegex = /^video/;
 export const imageRegex = /^image/;
 
 export interface IFileInfo {
-  type: string;
+  type: TFileType;
   width?: number;
   height?: number;
   size?: number;
