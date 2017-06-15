@@ -42,7 +42,7 @@ export class TypeChecker {
   private types: TFileTypes;
 
   constructor(types: TFileTypes = []) {
-    this.types = [];
+    this.types = types;
   }
 
   public setTypes = (types: TFileTypes) => {

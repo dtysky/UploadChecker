@@ -5,7 +5,7 @@ Check and constrain type/size/resolution while uploading files in pure front-end
 
 ## Demo
 
-[You can view the live demo here.](https://upload-checker.dtysky.moe)
+[You can view the live demo here.](http://upload-checker.dtysky.moe)
 
 ## Browsers Supporting
 
@@ -42,9 +42,9 @@ Following tables show all types and interfaces:
 
 ### IFileInfo
 
-|Name|required|type|Description|
+|Name|Required|Type|Description|
 |-|:-:|-|-|
-|type|√|TFileType|Type of file.|
+|Type|√|TFileType|Type of file.|
 |width|x|number|Width of image or video.|
 |height|x|number|Height of image or video.|
 |size|x|number|Size (width x height) of image or video.|
@@ -52,7 +52,7 @@ Following tables show all types and interfaces:
 
 ### ICheckError
 
-|Name|required|type|Description|
+|Name|Required|Type|Description|
 |-|:-:|-|-|
 |name|√|TError|Type of error.|
 |currentValue|√|number \| string[] \| string|Current value of wrong constraint.|
@@ -62,7 +62,7 @@ Following tables show all types and interfaces:
 
 ### ICheckResponse
 
-|Name|required|type|Description|
+|Name|Required|Type|Description|
 |-|:-:|-|-|
 |file|√|TFile|Current file.|
 |info|√|IFileInfo|Info of file.|
@@ -79,7 +79,7 @@ import {checkType} from 'upload-checker';
 or
 
 ```ts
-import {checkType} from 'upload-checker/TypeChecker';
+import {checkType} from 'upload-checker/src/TypeChecker';
 ```
 
 In the second way, only module `TypeChecker` will be packed to your source file.
@@ -102,16 +102,18 @@ An class for storing types' constraints then could be reused with `check` method
 
 In module `upload-checker/TypeChecker`.
 
-|Method|type|Description|
+|Method|Type|Description|
 |-|-|-|
 |constructor|(types: TFileTypes = []) => void|Constructor function, if types is empty, all file types will be allowed.|
 |setTypes|(types: TFileTypes) => void|Set types of checker.|
 |check|(file: TFile) => Promise<ICheckResponse>|Check file with current types.|
 
 ```ts
-const checker = TypeChecker(['image/png']);
+const checker = new TypeChecker(['image/png']);
 checker.setTypes(['image/jpeg']);
-checker.check(file);
+checker.check(file)
+.then(res => {......})
+.catch(res => {......});
 ```
 
 ### checkImage
@@ -132,16 +134,18 @@ An class for storing image's constraints then could be reused with `check` metho
 
 In module `upload-checker/ImageChecker`.
 
-|Method|type|Description|
+|Method|Type|Description|
 |-|-|-|
 |constructor|(maxBytesPerPixel: number, maxSize: number, maxWidth?: number) => void|Constructor function, if max[attr] is 0, checker will not check that.|
 |setAttr|(key: TImageConstraintKey, value: number) => void|Set attr of checker.|
 |check|(file: TFile) => Promise<ICheckResponse>|Check file with current constraint.|
 
 ```ts
-const checker = ImageChecker(.5, 1280 * 720);
+const checker = new ImageChecker(.5, 1280 * 720);
 checker.setAttr('maxWidth', 1280);
-checker.check(file);
+checker.check(file)
+.then(res => {......})
+.catch(res => {......});
 ```
 
 ### checkVideo
@@ -162,16 +166,18 @@ An class for storing video's constraints then could be reused with `check` metho
 
 In module `upload-checker/VideoChecker`.
 
-|Method|type|Description|
+|Method|Type|Description|
 |-|-|-|
 |constructor|(maxBytesPerPixelPerSecond: number, maxDuration: number, maxSize: number, maxWidth?: number) => void|Constructor function, if max[attr] is 0, checker will not check that.|
 |setTypes|(types: TFileTypes) => void|Set attr of checker.|
 |check|(file: TFile) => Promise<ICheckResponse>|Check file with current constraint.|
 
 ```ts
-const checker = videoChecker(.5, 10, 1280 * 720);
+const checker = new VideoChecker(.5, 10, 1280 * 720);
 checker.setAttr('maxWidth', 1280);
-checker.check(file);
+checker.check(file)
+.then(res => {......})
+.catch(res => {......});
 ```
 
 ### UploadChecker
@@ -180,9 +186,9 @@ A react component for better usage.
 
 #### Props
 
-|Name|type|Description|
+|Name|Type|Description|
 |-|-|-|
-|types|IFileTypes|Same as parameters of constructor of TypeChecker.|
+|Types|IFileTypes|Same as parameters of constructor of TypeChecker.|
 |multiple|boolean|Could user select multiple files.|
 |onDrop|(res: ICheckResponse) => void|A callback will be called after file is checked.|
 |imageConstraint|Same as parameters of constructor of ImageChecker.|Constraints for image files.|
