@@ -1,11 +1,11 @@
 # UploadChecker
 Check and constrain type/size/resolution while uploading files in pure front-end way.
 
-[![ghit.me](https://ghit.me/badge.svg?repo=dtysky/MoeNotes)](https://ghit.me/repo/dtysky/MoeNotes)
+[![Test status](https://travis-ci.org/dtysky/UploadChecker.svg?branch=master)](https://travis-ci.org/dtysky/UploadChecker)
 
 ## Demo
 
-[You can view the live demo here.]()
+[You can view the live demo here.](https://upload-checker.dtysky.moe)
 
 ## Browsers Supporting
 

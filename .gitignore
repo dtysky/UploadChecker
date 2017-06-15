@@ -5,3 +5,6 @@ node_modules
 
 **/dist
 reports
+
+demo/main.bundle.css
+demo/main.bundle.js

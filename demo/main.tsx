@@ -9,7 +9,6 @@ import {render} from 'react-dom';
 import Card from 'semantic-ui-react/dist/commonjs/views/Card';
 import Label from 'semantic-ui-react/dist/commonjs/elements/Label';
 import Input from 'semantic-ui-react/dist/commonjs/elements/Input';
-import Icon from 'semantic-ui-react/dist/commonjs/elements/Icon';
 import Checkbox from 'semantic-ui-react/dist/commonjs/modules/Checkbox';
 import Table from 'semantic-ui-react/dist/commonjs/collections/Table';
 import Form from 'semantic-ui-react/dist/commonjs/collections/Form';
@@ -27,20 +26,20 @@ interface IPropTypes {
 }
 
 interface IStateTypes {
-  types: string[];
-  multiple: boolean;
-  imageConstraint: {
+  types?: string[];
+  multiple?: boolean;
+  imageConstraint?: {
     maxBytesPerPixel: number,
     maxSize: number,
     maxWidth: number,
   };
-  videoConstraint: {
+  videoConstraint?: {
     maxBytesPerPixelPerSecond: number,
     maxSize: number,
     maxWidth: number,
     maxDuration: number
   };
-  info: {
+  info?: {
     error?: string;
     type?: string;
     width?: number;

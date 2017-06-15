@@ -13,9 +13,6 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "demo/**/*.ts",
-    "demo/**/*.tsx",
-    "node_modules/**/*.d.ts",
-    "node_modules/@types/**/*.ts",
-    "typings/**/*.d.ts"
+    "demo/**/*.tsx"
   ]
 }

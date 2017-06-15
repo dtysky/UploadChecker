@@ -11,7 +11,7 @@ module.exports = {
   entry: ['webpack-hot-middleware/client?path=http://localhost:4444/__webpack_hmr&reload=true'],
   output: {
     path: path.resolve(__dirname),
-    filename: 'main.js',
+    filename: 'main.bundle.js',
     publicPath: '/'
   },
 
@@ -103,10 +103,6 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin({
-      filename: 'main.css',
-      allChunks: true
-    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.ProvidePlugin({})
   ]
