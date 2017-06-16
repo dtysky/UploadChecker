@@ -1,6 +1,6 @@
 {
   "name": "upload-checker",
-  "version": "0.9.0",
+  "version": "1.0.0",
   "description": "Check type/size/resolution while uploading files in pure front-end way.",
   "main": "index.ts",
   "scripts": {
