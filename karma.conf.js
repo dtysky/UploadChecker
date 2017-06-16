@@ -36,7 +36,18 @@ module.exports = function(config) {
 
     karmaTypescriptConfig: {
       reports: {
-        'html': 'reports'
+        html: {
+          directory: 'reports',
+          subdirectory: '/'
+        },
+        lcovonly: {
+          directory: 'reports',
+          subdirectory: '/'
+        },
+        json: {
+          directory: 'reports',
+          subdirectory: '/'
+        }
       }
     },
 
