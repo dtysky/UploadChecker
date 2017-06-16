@@ -3,15 +3,9 @@
  * Created: 2017/6/15
  * Description:
  */
-/**
- * Copyright(c) dtysky<dtysky@outlook.com>
- * Created: 2017/6/15
- * Description:
- */
 import {checkVideo, VideoChecker} from '../src/VideoChecker';
 import * as VC from '../src/VideoChecker';
 import {spy} from 'sinon';
-import {TFile} from '../src/types';
 
 import {loadFile} from './utils';
 
