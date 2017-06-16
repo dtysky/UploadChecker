@@ -87,7 +87,7 @@ In the second way, only module `TypeChecker` will be packed to your source file.
 
 ### checkType
 
-(file: TFile,types: TFileTypes) => Promise<ICheckResponse>
+(file: TFile,types: TFileTypes) => Promise\<ICheckResponse\>
 
 In module `upload-checker/TypeChecker`.
 
@@ -107,7 +107,7 @@ In module `upload-checker/TypeChecker`.
 |-|-|-|
 |constructor|(types: TFileTypes = []) => void|Constructor function, if types is empty, all file types will be allowed.|
 |setTypes|(types: TFileTypes) => void|Set types of checker.|
-|check|(file: TFile) => Promise<ICheckResponse>|Check file with current types.|
+|check|(file: TFile) => Promise\<ICheckResponse\>|Check file with current types.|
 
 ```ts
 const checker = new TypeChecker(['image/png']);
@@ -139,7 +139,7 @@ In module `upload-checker/ImageChecker`.
 |-|-|-|
 |constructor|(maxBytesPerPixel: number, maxSize: number, maxWidth?: number) => void|Constructor function, if max[attr] is 0, checker will not check that.|
 |setAttr|(key: TImageConstraintKey, value: number) => void|Set attr of checker.|
-|check|(file: TFile) => Promise<ICheckResponse>|Check file with current constraint.|
+|check|(file: TFile) => Promise\<ICheckResponse\>|Check file with current constraint.|
 
 ```ts
 const checker = new ImageChecker(.5, 1280 * 720);
@@ -151,7 +151,7 @@ checker.check(file)
 
 ### checkVideo
 
-(file: TFile, maxBytesPerPixelPerSecond: number, maxDuration: number, maxSize: number, maxWidth?: number) => Promise<ICheckResponse>
+(file: TFile, maxBytesPerPixelPerSecond: number, maxDuration: number, maxSize: number, maxWidth?: number) => Promise\<ICheckResponse\>
 
 In module `upload-checker/VideoChecker`.
 
@@ -171,7 +171,7 @@ In module `upload-checker/VideoChecker`.
 |-|-|-|
 |constructor|(maxBytesPerPixelPerSecond: number, maxDuration: number, maxSize: number, maxWidth?: number) => void|Constructor function, if max[attr] is 0, checker will not check that.|
 |setTypes|(types: TFileTypes) => void|Set attr of checker.|
-|check|(file: TFile) => Promise<ICheckResponse>|Check file with current constraint.|
+|check|(file: TFile) => Promise\<ICheckResponse\>|Check file with current constraint.|
 
 ```ts
 const checker = new VideoChecker(.5, 10, 1280 * 720);
