@@ -2,7 +2,7 @@
 Check and constrain type/size/resolution while uploading files in pure front-end way.
 
 [![Test status](https://travis-ci.org/dtysky/UploadChecker.svg?branch=master)](https://travis-ci.org/dtysky/UploadChecker)
-[![Coverage Status](https://coveralls.io/repos/github/dtysky/UploadChecker/badge.svg?branch=master)](https://coveralls.io/github/dtysky/UploadChecker?branch=master)
+![Coverage](./coverage.png)
 
 ## Demo
 
