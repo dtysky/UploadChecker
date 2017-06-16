@@ -77,9 +77,9 @@ export default class UploadChecker extends Component<IPropTypes, IStateTypes> {
             checkVideo(
               file,
               videoConstraint.maxBytesPerPixelPerSecond,
+              videoConstraint.maxDuration,
               videoConstraint.maxSize,
-              videoConstraint.maxWidth,
-              videoConstraint.maxDuration
+              videoConstraint.maxWidth
             )
               .then(res => onDrop(res))
               .catch(res => onDrop(res));

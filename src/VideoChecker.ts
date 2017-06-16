@@ -76,15 +76,15 @@ export const checkVideo: (
         });
       }
 
-      const maxMB = ~~(maxBytesPerPixelPerSecond * size * duration / 1024 / 1024) + 1;
+      const maxKB = ~~(maxBytesPerPixelPerSecond * size * duration / 1024) + 1;
 
-      if (maxSize && maxDuration && maxBytesPerPixelPerSecond &&  file.size > maxMB * 1024 * 1024) {
+      if (maxSize && maxDuration && maxBytesPerPixelPerSecond &&  file.size > maxKB * 1024) {
         return reject({
           error: new CheckError({
             name: 'bytes',
             currentValue: file.size,
-            limitValue: maxMB * 1024 * 1024,
-            message: `In current size ${width} x ${height} and duration ${duration}，video should be less than ${maxMB.toFixed(2)}MB`
+            limitValue: maxKB * 1024,
+            message: `In current size ${width} x ${height} and duration ${duration}，video should be less than ${(maxKB / 1024).toFixed(2)}MB`
           }),
           file,
           info
@@ -105,6 +105,7 @@ export const checkVideo: (
         info: {type: 'unknown'}
       });
     };
+    document.body.appendChild(video);
     video.src = URL.createObjectURL(file);
   });
 }

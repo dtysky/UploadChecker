@@ -18,7 +18,8 @@ import UploadChecker from '../index';
 
 const selectableTypes = [
   'image/png', 'image/jpeg', 'image/gif', 'image/webp',
-  'video/webm', 'video/mp4', 'video/ogg', 'video/quicktime'
+  'video/webm', 'video/mp4', 'video/ogg', 'video/quicktime',
+  'text/html', 'application/pdf', 'text/txt'
 ];
 
 interface IPropTypes {
@@ -120,7 +121,7 @@ class Demo extends Component<IPropTypes, IStateTypes> {
                   Types
                 </Card.Header>
                 <Card.Meta>
-                  File types, if noting be chosen, all files are allowed.
+                  File types, if noting be chosen, all files are allowed. Here are some file types for testing.
                 </Card.Meta>
                 <Card.Description>
                   {this.renderTypesSelect()}

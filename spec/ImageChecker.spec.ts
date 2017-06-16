@@ -127,13 +127,13 @@ describe('ImageChecker', () => {
     let checker: ImageChecker;
 
     beforeEach(() => {
-      checker = new ImageChecker(.5, 1280 * 720);
+      checker = new ImageChecker(.5, 1280 * 720, 1000);
     });
 
     it('Constructor', () => {
       expect(checker['maxBytesPerPixel']).toEqual(.5);
       expect(checker['maxSize']).toEqual(1280 * 720);
-      expect(checker['maxWidth']).toEqual(0);
+      expect(checker['maxWidth']).toEqual(1000);
     });
 
     it('setAttr', () => {
@@ -146,7 +146,7 @@ describe('ImageChecker', () => {
         (<any>IC).checkImage = spy(checkImage);
         checker.check(file)
           .then(() => {
-            expect((<any>IC.checkImage).calledWith(file, .5, 1280 * 720, 0)).toBeTruthy();
+            expect((<any>IC.checkImage).calledWith(file, .5, 1280 * 720, 1000)).toBeTruthy();
             done();
           });
       });
