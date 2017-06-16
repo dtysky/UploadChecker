@@ -217,7 +217,7 @@ class Demo extends Component<IPropTypes, IStateTypes> {
               <Input
                 value={this.state.imageConstraint[key]}
                 onChange={(e, data) => {
-                  this.state.imageConstraint[key] = data.value;
+                  this.state.imageConstraint[key] = parseFloat(data.value);
                   this.forceUpdate();
                 }}
               />
@@ -243,7 +243,7 @@ class Demo extends Component<IPropTypes, IStateTypes> {
               <Input
                 value={this.state.videoConstraint[key]}
                 onChange={(e, data) => {
-                  this.state.videoConstraint[key] = data.value;
+                  this.state.videoConstraint[key] = parseFloat(data.value);
                   this.forceUpdate();
                 }}
               />

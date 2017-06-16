@@ -211,6 +211,16 @@ npm run dev
 
 then open `localhost:4444`.
 
+### Unit test
+
+Run:
+
+```bash
+npm run unittest
+```
+
+then find reports in the `report` folder.
+
 ### Build
 
 Run:

@@ -12,7 +12,9 @@ module.exports = function(config) {
 
     files: [
       {pattern: 'src/**/*.ts'},
-      {pattern: 'spec/**/*.ts'}
+      {pattern: 'spec/**/*.ts'},
+      {pattern: 'test-files/*.png', watched: false, included: false, served: true, nocache: false},
+      {pattern: 'test-files/*.mp4', watched: false, included: false, served: true, nocache: false}
     ],
 
     port: 9876,
