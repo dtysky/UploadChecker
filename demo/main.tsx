@@ -14,7 +14,7 @@ import Table from 'semantic-ui-react/dist/commonjs/collections/Table';
 import Form from 'semantic-ui-react/dist/commonjs/collections/Form';
 
 import './main.css';
-import UploadChecker from '../index';
+import UploadChecker from '../src/index';
 
 const selectableTypes = [
   'image/png', 'image/jpeg', 'image/gif', 'image/webp',

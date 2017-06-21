@@ -2,11 +2,11 @@
   "name": "upload-checker",
   "version": "1.0.0",
   "description": "Check type/size/resolution while uploading files in pure front-end way.",
-  "main": "index.ts",
+  "main": "dist/index.js",
   "scripts": {
     "dev": "node server.dev.js",
     "unittest": "./node_modules/.bin/karma start karma.conf.js",
-    "public": "./node_modules/.bin/tsc index.ts --jsx react",
+    "public": "./node_modules/.bin/tsc src/index.ts --jsx react -d -outDir dist",
     "build-demo": "webpack -p --config ./webpack.demo.config.js "
   },
   "repository": {
@@ -25,6 +25,11 @@
     "url": "https://github.com/dtysky/UploadChecker/issues"
   },
   "homepage": "https://github.com/dtysky/UploadChecker#readme",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "devDependencies": {
     "@types/jasmine": "^2.5.52",
     "@types/node": "^7.0.11",

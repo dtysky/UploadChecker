@@ -13,7 +13,7 @@ import {checkType} from './TypeChecker';
 import {checkImage} from './ImageChecker';
 import {checkVideo} from './VideoChecker';
 
-interface IPropTypes {
+export interface ICheckerPropTypes {
   types: TFileTypes;
   multiple?: boolean;
   onDrop?: (res: ICheckResponse) => void;
@@ -33,12 +33,12 @@ interface IPropTypes {
   }
 }
 
-interface IStateTypes {
+export interface ICheckerStateTypes {
 
 }
 
-export default class UploadChecker extends Component<IPropTypes, IStateTypes> {
-  static defaultProps: IPropTypes = {
+export default class UploadChecker extends Component<ICheckerPropTypes, ICheckerStateTypes> {
+  static defaultProps: ICheckerPropTypes = {
     types: [],
     multiple: false,
     onDrop: () => {}

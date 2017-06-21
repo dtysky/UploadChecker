@@ -80,7 +80,7 @@ import {checkType} from 'upload-checker';
 or
 
 ```ts
-import {checkType} from 'upload-checker/src/TypeChecker';
+import {checkType} from 'upload-checker/dist/TypeChecker';
 ```
 
 In the second way, only module `TypeChecker` will be packed to your source file.
