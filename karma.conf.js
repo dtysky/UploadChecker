@@ -42,6 +42,9 @@ module.exports = function(config) {
     reporters: ['progress', 'karma-typescript'],
 
     karmaTypescriptConfig: {
+      bundlerOptions: {
+        entrypoints: /\.spec\.ts$/
+      },
       reports: {
         html: {
           directory: 'reports',

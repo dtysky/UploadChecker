@@ -9,7 +9,6 @@
     "types": []
   },
   "include": [
-    "index.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
     "demo/**/*.ts",
