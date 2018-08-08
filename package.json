@@ -1,6 +1,6 @@
 {
   "name": "upload-checker",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Check type/size/resolution while uploading files in pure front-end way.",
   "main": "dist/index.js",
   "scripts": {
@@ -64,17 +64,17 @@
     "url-loader": "^0.5.7",
     "webpack": "^2.2.1",
     "webpack-dev-middleware": "^1.9.0",
-    "webpack-hot-middleware": "^2.17.1"
-  },
-  "dependencies": {
-    "@types/classnames": "0.0.32",
-    "@types/es6-shim": "^0.31.32",
-    "@types/react": "^15.0.15",
-    "@types/react-dom": "^0.14.23",
-    "classnames": "^2.2.5",
+    "webpack-hot-middleware": "^2.17.1",
     "es6-shim": "^0.35.3",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
-    "semantic-ui-react": "^0.68.5"
+    "semantic-ui-react": "^0.68.5",
+    "@types/es6-shim": "^0.31.32",
+    "@types/react": "^15.0.15",
+    "@types/react-dom": "^0.14.23"
+  },
+  "dependencies": {
+    "@types/classnames": "0.0.32",
+    "classnames": "^2.2.5"
   }
 }
